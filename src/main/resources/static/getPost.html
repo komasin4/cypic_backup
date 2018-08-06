@@ -1,0 +1,36 @@
+<html>
+
+<head>
+
+<script type="text/javascript">
+
+function getFolderList()	{
+	alert('getFolderList');
+
+	$.ajax({
+		   url: "/getFolderList",
+		   async: false,
+		   dataType: 'jsonp',
+		   success: function(json) {
+		      ...
+		   },
+		   error: function(error) {
+		      console.log(error);
+		   }
+		});
+
+}
+
+</script>
+
+</head>
+
+<body onload="javascript:getFolderList()">
+
+<div id="folderlist">
+folder list area<br/>
+</div>
+
+</body>
+
+</html>

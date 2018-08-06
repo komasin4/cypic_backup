@@ -1,0 +1,65 @@
+<html>
+
+<head>
+
+<script src="http://code.jquery.com/jquery.min.js"></script>
+
+<script type="text/javascript" src="/js/secure/xecure.js"></script>
+<script type="text/javascript" src="/js/secure/rsa.js"></script>
+<script type="text/javascript" src="/js/secure/base64.js"></script>
+<script type="text/javascript" src="/js/secure/jsbn.js"></script>
+<script type="text/javascript" src="/js/secure/prng4.js"></script>
+<script type="text/javascript" src="/js/secure/rng.js"></script>
+
+<!--
+<script type="text/javascript" src="http://cyxso.cyworld.com/common/js/common.js"></script>
+<script type="text/javascript" src="http://cyxso.cyworld.com/common/secure/js/xecure_cyworld.js?ver=20110727"></script>
+<script type="text/javascript" src="http://cyxso.cyworld.com/common/js/login.js"></script>
+<script type="text/javascript" src="http://cyxso.cyworld.com/common/js/lunar.js"></script>
+<script type="text/javascript" src="http://cyxso.cyworld.com/common/secure/js/rsa/base64.js"></script>
+<script type="text/javascript" src="http://cyxso.cyworld.com/common/secure/js/rsa/jsbn.js"></script>
+<script type="text/javascript" src="http://cyxso.cyworld.com/common/secure/js/rsa/prng4.js"></script>
+<script type="text/javascript" src="http://cyxso.cyworld.com/common/secure/js/rsa/rng.js"></script>
+<script type="text/javascript" src="http://cyxso.cyworld.com/common/secure/js/rsa/rsa.js"></script>
+-->
+
+
+<script type="text/javascript">
+	//document.domain = "cyworld.com";
+
+	function test1()	{
+
+		var email = $("#email");
+		//alert(email.val());
+
+		var frm = document.testForm;
+
+		result = xRSA.encrypt(frm.email, frm.passwd, frm.passwd_rsa);
+		result2 = xRSA.encrypt(frm.email, frm.email, frm.email_rsa);
+
+		//alert(frm.email_rsa);
+		//alert(frm.passwd_rsa);
+
+		frm.submit();
+	}
+
+</script>
+
+
+</head>
+
+<body>
+	<!--
+	<form name="testForm" action="https://cyxso.cyworld.com/LoginAuth.sk" method="post">
+	-->
+	<form name="testForm" action="/test2" method="post">
+		<input type="text" id="email" name="email"/>
+		<input type="text" id="passwd" name="passwd"/>
+		<input type="text" id="email_rsa" name="email_rsa"/>
+		<input type="text" id="passwd_rsa" name="passwd_rsa"/>
+		<input type="button" onclick="javascript:test1()" value="test"/>
+	</form>
+
+</body>
+
+</html>
