@@ -68,6 +68,7 @@ public class PostController extends Common {
 	                .header("Accept-Encoding", "gzip, deflate, sdch")
 	                .header("Accept-Language", "ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4")
 	                .cookies(loginCookie) // 위에서 얻은 '로그인 된' 쿠키
+	                .ignoreHttpErrors(true).validateTLSCertificates(false).followRedirects(true)
 					.get();
 
 			for(Element el:posts.select("article"))	{
@@ -162,6 +163,7 @@ public class PostController extends Common {
 	                .header("Accept-Encoding", "gzip, deflate, sdch")
 	                .header("Accept-Language", "ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4")
 	                .cookies(loginCookie) // 위에서 얻은 '로그인 된' 쿠키
+	                .ignoreHttpErrors(true).validateTLSCertificates(false).followRedirects(true)
 					.get();
 
 			for(Element el:posts.select("article"))	{
@@ -209,6 +211,7 @@ public class PostController extends Common {
 	                .header("Accept-Encoding", "gzip, deflate, sdch")
 	                .header("Accept-Language", "ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4")
 	                .cookies(loginCookie) // 위에서 얻은 '로그인 된' 쿠키
+	                .ignoreHttpErrors(true).validateTLSCertificates(false).followRedirects(true)
 					.get();
 
 			Element postEl = postDoc.getElementById("postData");
@@ -263,7 +266,7 @@ public class PostController extends Common {
 			logger.debug("***" + img);
 			
 			try {
-				downloadUsingNIO(img, "/test/" + post.getTitle() + "_" + getFileName(img) );
+				downloadUsingNIO(img, "/test/" + post.getYyyymm() + "_" + post.getTitle() + "_" + getFileName(img) );
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

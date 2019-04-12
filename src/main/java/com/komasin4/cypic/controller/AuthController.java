@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import util.JsoupHttps;
 import util.StringUtil;
 import com.komasin4.cypic.common.Common;
 
@@ -68,7 +69,16 @@ public class AuthController extends Common {
 			session.setAttribute("cyCookie",loginCookie);
 
 			//메인 페이지 불러오기 (tid 추출을 위함)
-			Document cyMain = Jsoup.connect("http://www.cyworld.com")
+//			Document cyMain = Jsoup.connect("http://www.cyworld.com")
+//			String connUrl =  "http://cy.cyworld.com/timeline";
+			String connUrl =  "http://club.cyworld.com/club/clubsection2/home.asp";
+			
+			//SSL 체크
+            //if(connUrl.indexOf("https://") >= 0){
+            //   JsoupHttps.setSSL();
+            //}
+			
+			Document cyMain = Jsoup.connect(connUrl)
 					.userAgent(userAgent)
                     .header("Accept", accept)
                     .header("Content-Type", content_type)
@@ -81,10 +91,12 @@ public class AuthController extends Common {
 			String tid = null;
 			for(Element el:cyMain.select("script[type]"))	{
 				String unescapedHtml = el.data();
-				int idx = unescapedHtml.indexOf("var tid=");
+				//int idx = unescapedHtml.indexOf("var tid=");
+				int idx = unescapedHtml.indexOf("var statUserId = ");
 				if(idx > -1)	{
 					String tid_src = unescapedHtml.substring(idx);
-					tid = StringUtil.getVariable(tid_src, "tid");
+					//tid = StringUtil.getVariable(tid_src, "tid");
+					tid = StringUtil.getVariable(tid_src, "statUserId");
 					logger.debug("tid:" + tid);
 				}
 			}
